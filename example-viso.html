@@ -32,15 +32,101 @@
             color: var(--viso-text-muted);
             margin-bottom: 16px;
         }
+
+        /* Animated rainbow gradient background */
+        .animated-bg {
+            background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3, #ff0000);
+            background-size: 400% 100%;
+            animation: rainbowScroll 10s linear infinite;
+        }
+
+        @keyframes rainbowScroll {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 400% 50%; }
+        }
+
+        /* Header toggle styles */
+        .header-toggle {
+            margin-left: auto;
+        }
+
+        /* Epilepsy warning modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--transition-fast);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--viso-bg-secondary);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            max-width: 400px;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            transform: translateY(20px);
+            transition: transform var(--transition-bounce);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-content h3 {
+            color: var(--viso-red);
+            margin-bottom: var(--space-4);
+        }
+
+        .modal-content p {
+            margin-bottom: var(--space-6);
+            color: var(--viso-text-secondary);
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: var(--space-4);
+            justify-content: center;
+        }
     </style>
 </head>
 <body style="min-height: 100vh;">
+    <!-- Epilepsy Warning Modal -->
+    <div class="modal-overlay" id="epilepsyModal">
+        <div class="modal-content">
+            <h3 class="viso-h3">⚠️ Warning</h3>
+            <p class="viso-body">The animated background contains rapidly changing colors that may trigger seizures in people with photosensitive epilepsy.</p>
+            <div class="modal-buttons">
+                <button class="viso-btn viso-btn-primary" id="confirmAnim">Continue</button>
+                <button class="viso-btn viso-btn-secondary" id="cancelAnim">Cancel</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Header -->
     <header style="border-bottom: 1px solid var(--glass-border); padding: 24px 0;">
         <div class="viso-container">
-            <div class="viso-flex viso-items-center viso-gap-4">
+            <div class="viso-flex viso-items-center viso-gap-4" style="flex-wrap: wrap;">
                 <span style="color: var(--viso-accent); font-size: 24px;">◆</span>
                 <h1 class="viso-h1" style="margin: 0;">Viso Design System</h1>
+                <div class="header-toggle">
+                    <label class="viso-toggle-neutral">
+                        <input type="checkbox" id="bgToggle" data-on="ANIM" data-off="STATIC">
+                    </label>
+                </div>
             </div>
             <p class="viso-body" style="margin-top: 8px;">An open-source dark theme inspired by modern glassmorphism.</p>
         </div>
@@ -75,6 +161,7 @@
                     <div class="viso-flex viso-flex-col viso-gap-4">
                         <button class="viso-btn viso-btn-primary">Primary Button</button>
                         <button class="viso-btn viso-btn-secondary">Secondary Button</button>
+                        <button class="viso-btn viso-btn-glass">Glass Button</button>
                         <button class="viso-btn viso-btn-ghost">Ghost Button</button>
                         <button class="viso-btn viso-btn-danger">Danger Button</button>
                     </div>
@@ -100,6 +187,21 @@
                         <button class="viso-btn viso-btn-primary viso-btn-icon">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M20 6L9 17l-5-5"/>
+                            </svg>
+                        </button>
+                        <button class="viso-btn viso-btn-glass viso-btn-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 3v18M3 12h18"/>
+                            </svg>
+                        </button>
+                        <button class="viso-btn viso-btn-ghost viso-btn-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 20h9M12 20V4M12 4H3"/>
+                            </svg>
+                        </button>
+                        <button class="viso-btn viso-btn-danger viso-btn-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 6L6 18M6 6l12 12"/>
                             </svg>
                         </button>
                     </div>
@@ -175,6 +277,28 @@
                         <div class="viso-slider-percent">60%</div>
                     </div>
                 </div>
+
+                <div class="component-demo">
+                    <div class="component-label">Toggle Switch</div>
+                    <label class="viso-toggle">
+                        <input type="checkbox" checked>
+                        <span>Enabled feature</span>
+                    </label>
+                    <label class="viso-toggle" style="margin-top: 12px;">
+                        <input type="checkbox">
+                        <span>Disabled feature</span>
+                    </label>
+                </div>
+
+                <div class="component-demo">
+                    <div class="component-label">Neutral Toggle (Text Inside)</div>
+                    <label class="viso-toggle-neutral">
+                        <input type="checkbox" data-on="ON" data-off="OFF" checked>
+                    </label>
+                    <label class="viso-toggle-neutral" style="margin-top: 12px;">
+                        <input type="checkbox" data-on="YES" data-off="NO">
+                    </label>
+                </div>
             </div>
         </section>
 
@@ -220,6 +344,31 @@
 
         <div class="viso-divider"></div>
 
+        <!-- Modal Section -->
+        <section class="section">
+            <h2 class="viso-h2">Modal</h2>
+            
+            <div class="component-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                <div class="component-demo">
+                    <div class="component-label">Example Modal</div>
+                    <button class="viso-btn viso-btn-primary" id="openModalBtn">Open Modal</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Example Modal -->
+        <div class="modal-overlay" id="exampleModal">
+            <div class="modal-content" style="max-width: 500px;">
+                <h3 class="viso-h3">Example Modal</h3>
+                <p class="viso-body">This is an example modal dialog. It uses the same styling as the epilepsy warning modal with a backdrop blur effect and smooth animations.</p>
+                <div class="modal-buttons">
+                    <button class="viso-btn viso-btn-primary" id="closeModalBtn">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="viso-divider"></div>
+
         <!-- Colors Section -->
         <section class="section">
             <h2 class="viso-h2">Color Palette</h2>
@@ -250,10 +399,62 @@
     <footer style="border-top: 1px solid var(--glass-border); padding: 24px 0; margin-top: 48px;">
         <div class="viso-container">
             <p class="viso-caption" style="text-align: center;">
-                Viso Design System v1.0.0 • Open Source • AI Generated Code, Human Made Design
+                Viso Design System • Open Source • AI Generated Code, Human Made Design
             </p>
         </div>
     </footer>
 
+    <script>
+        const bgToggle = document.getElementById('bgToggle');
+        const modal = document.getElementById('epilepsyModal');
+        const confirmBtn = document.getElementById('confirmAnim');
+        const cancelBtn = document.getElementById('cancelAnim');
+
+        bgToggle.addEventListener('change', function() {
+            if (this.checked) {
+                this.checked = false;
+                modal.classList.add('active');
+            } else {
+                document.body.classList.remove('animated-bg');
+            }
+        });
+
+        confirmBtn.addEventListener('click', function() {
+            modal.classList.remove('active');
+            bgToggle.checked = true;
+            document.body.classList.add('animated-bg');
+        });
+
+        cancelBtn.addEventListener('click', function() {
+            modal.classList.remove('active');
+            bgToggle.checked = false;
+        });
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                bgToggle.checked = false;
+            }
+        });
+
+        // Example modal
+        const openModalBtn = document.getElementById('openModalBtn');
+        const exampleModal = document.getElementById('exampleModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+
+        openModalBtn.addEventListener('click', function() {
+            exampleModal.classList.add('active');
+        });
+
+        closeModalBtn.addEventListener('click', function() {
+            exampleModal.classList.remove('active');
+        });
+
+        exampleModal.addEventListener('click', function(e) {
+            if (e.target === exampleModal) {
+                exampleModal.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>
