@@ -16,9 +16,25 @@
 
 [data-theme="viso"], :root {
     /* 
+     * CUSTOMIZATION
+     * Change this accent color to theme the entire design system.
+     * Simply override these three variables with your hex color:
+     * 
+     * Example - Blue theme:
+     *   --viso-accent: #3b82f6;
+     *   --viso-accent-dim: #2563eb;
+     *   --viso-accent-glow: rgba(59, 130, 246, 0.4);
+     * 
+     * Example - Purple theme:
+     *   --viso-accent: #a855f7;
+     *   --viso-accent-dim: #9333ea;
+     *   --viso-accent-glow: rgba(168, 85, 247, 0.4);
+     */
+    
+    /* 
      * COLOR PALETTE
      * Primary backgrounds range from deep space to charcoal
-     * Accent colors inspired by Minecraft's signature green
+     * Default accent: Minecraft-inspired Green
      */
     
     /* Core Background Colors */
@@ -27,10 +43,10 @@
     --viso-bg-tertiary: #21262d;      /* Elevated elements, hover states */
     --viso-surface: rgba(22, 27, 34, 0.85);  /* Glassmorphism surface */
     
-    /* Accent Colors - Minecraft-inspired Green */
+    /* Accent Colors - CUSTOMIZE THESE */
     --viso-accent: #3ddc84;           /* Primary accent - vibrant green */
-    --viso-accent-dim: #2ea043;       /* Hover/active states */
-    --viso-accent-glow: rgba(61, 220, 132, 0.4);  /* Glow effects */
+    --viso-accent-dim: #2ea043;       /* Hover/active states - darker shade */
+    --viso-accent-glow: rgba(61, 220, 132, 0.4);  /* Glow effects - same hue, 40% opacity */
     
     /* Semantic Colors */
     --viso-gold: #ffd700;             /* Success, achievement, premium */
@@ -214,7 +230,7 @@
 }
 
 [data-theme="viso"] .viso-btn-primary:hover {
-    background: linear-gradient(145deg, var(--viso-accent), #4ade80);
+    background: linear-gradient(145deg, var(--viso-accent), var(--viso-accent-dim));
     transform: translateY(-2px);
     box-shadow: var(--shadow-md), var(--shadow-glow);
 }
@@ -368,6 +384,7 @@
     background: var(--glass-bg);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
+    -moz-backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-lg);
     padding: var(--space-6);
@@ -482,9 +499,11 @@
     background: var(--glass-bg);
     backdrop-filter: blur(12px) saturate(180%);
     -webkit-backdrop-filter: blur(12px) saturate(180%);
+    -moz-backdrop-filter: blur(12px) saturate(180%);
     cursor: pointer;
     appearance: none;
     -webkit-appearance: none;
+    -moz-appearance: none;
     position: relative;
     transition: all var(--transition-fast);
 }
@@ -519,11 +538,14 @@
 /* Standalone checkbox (alternative style) */
 [data-theme="viso"] .viso-checkbox {
     appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
     width: 20px;
     height: 20px;
     background: var(--glass-bg);
     backdrop-filter: blur(12px) saturate(180%);
     -webkit-backdrop-filter: blur(12px) saturate(180%);
+    -moz-backdrop-filter: blur(12px) saturate(180%);
     border: 2px solid var(--glass-border);
     border-radius: 4px;
     cursor: pointer;
@@ -574,11 +596,13 @@
 [data-theme="viso"] .viso-toggle input {
     appearance: none;
     -webkit-appearance: none;
+    -moz-appearance: none;
     width: 48px;
     height: 24px;
     background: var(--glass-bg);
     backdrop-filter: blur(12px) saturate(180%);
     -webkit-backdrop-filter: blur(12px) saturate(180%);
+    -moz-backdrop-filter: blur(12px) saturate(180%);
     border: 2px solid var(--glass-border);
     border-radius: var(--radius-full);
     position: relative;
@@ -638,11 +662,13 @@
 [data-theme="viso"] .viso-toggle-neutral input {
     appearance: none;
     -webkit-appearance: none;
+    -moz-appearance: none;
     width: 64px;
     height: 28px;
     background: var(--glass-bg);
     backdrop-filter: blur(12px) saturate(180%);
     -webkit-backdrop-filter: blur(12px) saturate(180%);
+    -moz-backdrop-filter: blur(12px) saturate(180%);
     border: 2px solid var(--glass-border);
     border-radius: var(--radius-full);
     position: relative;
@@ -683,6 +709,7 @@
     background: var(--glass-bg);
     backdrop-filter: blur(12px) saturate(180%);
     -webkit-backdrop-filter: blur(12px) saturate(180%);
+    -moz-backdrop-filter: blur(12px) saturate(180%);
     border-color: var(--glass-border);
 }
 
@@ -720,6 +747,7 @@
     background: var(--glass-bg);
     backdrop-filter: blur(12px) saturate(180%);
     -webkit-backdrop-filter: blur(12px) saturate(180%);
+    -moz-backdrop-filter: blur(12px) saturate(180%);
     border: 1px solid var(--glass-border);
     border-radius: 8px;
     display: flex;
@@ -757,7 +785,8 @@
 [data-theme="viso"] .viso-slider::-webkit-slider-runnable-track {
     width: 100%;
     height: 100%;
-    background: transparent;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: var(--radius-sm);
 }
 
 [data-theme="viso"] .viso-slider::-webkit-slider-thumb {
@@ -774,12 +803,38 @@
 
 [data-theme="viso"] .viso-slider::-webkit-slider-thumb:hover {
     transform: scaleX(1.15);
-    background: #4ade80;
+    background: var(--viso-accent);
 }
 
 [data-theme="viso"] .viso-slider:active::-webkit-slider-thumb {
     transform: scaleX(1.25) scaleY(1.05);
     cursor: grabbing;
+}
+
+/* Firefox slider styles */
+[data-theme="viso"] .viso-slider::-moz-range-track {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: var(--radius-sm);
+    border: none;
+}
+
+[data-theme="viso"] .viso-slider::-moz-range-thumb {
+    -moz-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 100%;
+    background: var(--viso-accent);
+    border-radius: var(--radius-sm);
+    box-shadow: 0 0 10px var(--viso-accent-glow);
+    border: none;
+    cursor: pointer;
+}
+
+[data-theme="viso"] .viso-slider::-moz-range-thumb:hover {
+    transform: scaleX(1.15);
+    background: var(--viso-accent);
 }
 
 [data-theme="viso"] .viso-slider:focus::-webkit-slider-thumb {

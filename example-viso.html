@@ -50,6 +50,41 @@
             margin-left: auto;
         }
 
+        /* Color picker styles */
+        .color-picker-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: 16px;
+        }
+
+        .color-picker-wrapper label {
+            color: var(--viso-text-muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .color-picker {
+            width: 40px;
+            height: 28px;
+            padding: 0;
+            border: 2px solid var(--glass-border);
+            border-radius: var(--radius-md);
+            background: transparent;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .color-picker::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+
+        .color-picker::-webkit-color-swatch {
+            border: none;
+            border-radius: 4px;
+        }
+
         /* Epilepsy warning modal */
         .modal-overlay {
             position: fixed;
@@ -126,6 +161,10 @@
                     <label class="viso-toggle-neutral">
                         <input type="checkbox" id="bgToggle" data-on="ANIM" data-off="STATIC">
                     </label>
+                </div>
+                <div class="color-picker-wrapper">
+                    <label for="accentColor">Accent</label>
+                    <input type="color" id="accentColor" class="color-picker" value="#3ddc84">
                 </div>
             </div>
             <p class="viso-body" style="margin-top: 8px;">An open-source dark theme inspired by modern glassmorphism.</p>
@@ -382,7 +421,7 @@
                     <div class="component-label">Background Secondary</div>
                     <code style="color: var(--viso-text-muted); font-size: 12px;">#161b22</code>
                 </div>
-                <div class="component-demo" style="background: var(--viso-accent);">
+                <div class="component-demo" style="background: #3ddc84;">
                     <div class="component-label" style="color: var(--viso-bg-primary);">Accent</div>
                     <code style="color: var(--viso-bg-primary); font-size: 12px;">#3ddc84</code>
                 </div>
@@ -454,6 +493,34 @@
             if (e.target === exampleModal) {
                 exampleModal.classList.remove('active');
             }
+        });
+
+        // Accent color picker
+        const accentColorPicker = document.getElementById('accentColor');
+        const root = document.documentElement;
+
+        // Helper function to darken a hex color
+        function darkenColor(hex, percent) {
+            const num = parseInt(hex.replace('#', ''), 16);
+            const amt = Math.round(2.55 * percent);
+            const R = (num >> 16) - amt;
+            const G = ((num >> 8) & 0x00FF) - amt;
+            const B = (num & 0x0000FF) - amt;
+            return '#' + (0x1000000 + (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 +
+                (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 +
+                (B < 255 ? B < 1 ? 0 : B : 255)).toString(16).slice(1);
+        }
+
+        accentColorPicker.addEventListener('input', function() {
+            const hexColor = this.value;
+            const dimColor = darkenColor(hexColor, 20);
+            const r = parseInt(hexColor.slice(1, 3), 16);
+            const g = parseInt(hexColor.slice(3, 5), 16);
+            const b = parseInt(hexColor.slice(5, 7), 16);
+            
+            root.style.setProperty('--viso-accent', hexColor);
+            root.style.setProperty('--viso-accent-dim', dimColor);
+            root.style.setProperty('--viso-accent-glow', `rgba(${r}, ${g}, ${b}, 0.4)`);
         });
     </script>
 </body>
