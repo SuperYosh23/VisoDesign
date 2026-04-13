@@ -72,7 +72,7 @@ Example:
 
 Before submitting:
 
-- [ ] Test in Chrome, Firefox, and Safari
+- [ ] Test in at least the latest stable version of Chromium (or a chromium based browser) and Firefox
 - [ ] Verify all states (default, hover, focus, active, disabled)
 - [ ] Check color contrast ratios
 - [ ] Test at different zoom levels
