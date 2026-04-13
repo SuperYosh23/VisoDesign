@@ -55,7 +55,7 @@ Example:
 ### Design Principles
 
 1. **Dark First**: All components should be designed for dark mode
-2. **Minecraft Aesthetic**: Use green accents (#3ddc84) as the primary accent
+2. **Green Accents**: Use vibrant green (#3ddc84) as the primary accent color
 3. **Glassmorphism**: Use `backdrop-filter: blur()` for elevated surfaces
 4. **Accessibility**: Ensure WCAG 2.1 AA compliance for color contrast
 5. **Performance**: Prefer CSS transforms and opacity for animations

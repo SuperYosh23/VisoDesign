@@ -7,7 +7,7 @@ An open-source dark theme design language featuring glassmorphism effects and vi
 
 - **Dark Theme**: Deep space-inspired color palette with high contrast text
 - **Glassmorphism**: Frosted glass effects with backdrop blur and translucent surfaces
-- **Vibrant Accents**: Minecraft-inspired green accent colors with glow effects
+- **Vibrant Accents**: Green accent colors with glow effects
 - **Semantic Colors**: Built-in success, error, and warning states
 - **Typography Scale**: Consistent heading and body text hierarchies
 - **Component Library**: Pre-styled buttons, inputs, cards, and more
