@@ -10,11 +10,11 @@ Thank you for your interest in contributing to Viso! This document provides guid
 
 ## Development Setup
 
-The Viso Design System is pure CSS - no build tools required! Simply open `example.html` in a browser to test your changes.
+The Viso Design System is pure CSS - no build tools required! Simply open `example-viso.html` in a browser to test your changes.
 
 ```bash
 # Test locally
-open example.html
+open example-viso.html
 
 # Or with a local server for better development
 npx serve .
@@ -29,7 +29,7 @@ When adding a new component:
 1. Use the existing CSS variables from `:root`
 2. Follow the naming convention: `.viso-[component-name]`
 3. Include hover, focus, and active states
-4. Add an example to `example.html`
+4. Add an example to `example-viso.html`
 5. Document the component in `README.md`
 
 Example:

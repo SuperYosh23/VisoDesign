@@ -72,10 +72,11 @@ Viso is built on CSS custom properties that can be customized:
 ### Buttons
 
 ```html
-<button class="viso-button">Default Button</button>
-<button class="viso-button viso-button-primary">Primary Button</button>
-<button class="viso-button viso-button-ghost">Ghost Button</button>
-<button class="viso-button viso-button-gold">Gold Button</button>
+<button class="viso-btn viso-btn-primary">Primary Button</button>
+<button class="viso-btn viso-btn-secondary">Secondary Button</button>
+<button class="viso-btn viso-btn-glass">Glass Button</button>
+<button class="viso-btn viso-btn-ghost">Ghost Button</button>
+<button class="viso-btn viso-btn-danger">Danger Button</button>
 ```
 
 ### Inputs
@@ -88,9 +89,9 @@ Viso is built on CSS custom properties that can be customized:
 ### Cards
 
 ```html
-<div class="viso-card">Card content</div>
-<div class="viso-card-glass">Glass card content</div>
-<div class="viso-card-gold">Gold accent card</div>
+<div class="viso-card">Glassmorphism card</div>
+<div class="viso-card-solid">Solid background card</div>
+<div class="viso-surface">Surface panel</div>
 ```
 
 ### Layout
@@ -105,34 +106,55 @@ Viso is built on CSS custom properties that can be customized:
   <span>Item 2</span>
 </div>
 
-<!-- Grid utilities -->
-<div class="viso-grid viso-grid-cols-3">
-  <div>Column 1</div>
-  <div>Column 2</div>
-  <div>Column 3</div>
+<!-- Progress -->
+<div class="viso-progress">
+  <div class="viso-progress-bar" style="width: 75%;"></div>
 </div>
+
+<!-- Spinner -->
+<div class="viso-spinner"></div>
+
+<!-- Badges -->
+<span class="viso-badge">Default</span>
+<span class="viso-badge viso-badge-accent">Accent</span>
+<span class="viso-badge viso-badge-gold">Gold</span>
+
+<!-- Tooltip -->
+<button class="viso-btn viso-btn-secondary viso-tooltip" data-tooltip="Helpful tip!">
+  Hover me
+</button>
 ```
 
 ## Typography Classes
 
-- `viso-h1` through `viso-h6` - Heading styles
-- `viso-text-sm`, `viso-text-base`, `viso-text-lg` - Text sizes
+- `viso-h1` through `viso-h3` - Heading styles
+- `viso-body` - Body text style
+- `viso-caption` - Caption text style
+- `viso-label` - Label text style (uppercase)
 - `viso-text-secondary`, `viso-text-muted` - Text color variants
-- `viso-font-mono` - Monospace text
+- `viso-accent-text` - Accent colored text
+- `viso-gold-text` - Gold colored text
+- `viso-muted-text` - Muted text color
 
 ## Spacing Utilities
 
 Spacing classes follow the pattern `viso-{property}-{size}`:
 
 - **Property**: `p` (padding), `m` (margin), `gap`
-- **Size**: `0`, `1` (4px), `2` (8px), `3` (12px), `4` (16px), `5` (24px), `6` (32px)
+- **Size**: `1` (4px), `2` (8px), `3` (12px), `4` (16px), `5` (20px), `6` (24px), `8` (32px), `10` (40px)
 
 Examples:
 
 ```html
-<div class="viso-p-4">16px padding</div>
-<div class="viso-m-2">8px margin</div>
-<div class="viso-gap-3">12px gap</div>
+<div class="viso-flex">Flex container</div>
+<div class="viso-flex-col">Flex column</div>
+<div class="viso-items-center">Centered items</div>
+<div class="viso-justify-center">Justify center</div>
+<div class="viso-gap-2">8px gap</div>
+<div class="viso-gap-4">16px gap</div>
+<div class="viso-container">Max-width container</div>
+<div class="viso-glow">Glow effect</div>
+<div class="viso-glow-text">Glowing text</div>
 ```
 
 ## Example
@@ -147,6 +169,10 @@ Viso uses modern CSS features including:
 - Grid and Flexbox layouts
 
 Compatible with all modern browsers (Chrome, Firefox, Safari, Edge).
+
+## License
+
+MIT License - see [LICENSE](LICENSE) file for details.
 
 ## Contributing
 
